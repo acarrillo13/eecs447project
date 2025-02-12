@@ -17,7 +17,7 @@ Astha:
 
 Beckett:
 
-Michael: Lead Deveo
+Michael: Lead Developer
 
 Kyle: Quality Assurance (QA) & Tester
 
