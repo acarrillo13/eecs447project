@@ -1,5 +1,5 @@
 Date: February 12, 2025
-Time: 12:00 PM -  PM
+Time: 12:00 PM - 12:45 PM
 Location: Zoom meeting
 Objective: Assign rolls, define scope, define vision statement 
 Team Members Present: Alexander Carrillo, Astha Thapa, Beckett Malinowski, Michael Buckendahl, Kyle Moore, Shravya Matta
@@ -12,22 +12,9 @@ Frontend Developer: Alexander Carrillo
 Testing and QA: Kyle Moore 
 Documentation Specialist: Astha Thapa
 
-
-Vision statement: Enhance library accessibility by designing a well-structured database for effortless navigation and enriching experiences with diverse book options.
-
-
-Scope of the project / What will be completed : 
-Book management system to add, update, categorize, and remove books efficiently.
-Advanced search filter: Users can search books by title, author, genre, or availability.
-Borrow & Return tracking
-Due date & fine management
-Inventory management (if the books or magazines have been loaned or if they are available)
-Mobile & Web accessibility (as making books accessible is our vision statement)
-Security and data protection
-
+The team defined the scope of the project as well as wrote our vision statement, we recorded this in "Project Part 1: Booknerds" which can be found in the documents
 
 Follow-Up Actions: 
 Weekly check-in discord meeting to check on the progress of the project and report it between the team members
 
-
-Schedule the next meeting for: Tuesday 7pm 18th Feb
+Schedule the next meeting for: Tuesday 7 pm 18th Feb
