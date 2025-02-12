@@ -1,0 +1,29 @@
+A Sample Meeting Log
+
+The following is a sample log that is minimal and gives a good view of a meeting. The names of the team members are anonymous
+
+Date: February 12, 2025
+Time: 12:00 PM -  PM
+Location: Zoom meeting
+Objective: Assign rolls, define scope, define vision statement 
+Team Members Present: Alexander Carrillo, Astha Thapa, Beckett Malinowski, Michael Buckendahl, Kyle Moore, Shravya Matta
+
+Rolls assigned:
+Shravya: Team Lead
+
+Alexander:
+
+Astha: 
+
+Beckett:
+
+Michael: Lead Deveo
+
+Kyle: Quality Assurance (QA) & Tester
+
+
+Vision statement: Enhance library accessibility by designing a well-structured database for efferotless navigation and an enriching experiences with diverse book options.
+
+Follow-Up Actions:
+
+Schedule the next meeting for 
