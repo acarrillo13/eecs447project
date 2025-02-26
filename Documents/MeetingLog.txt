@@ -4,7 +4,7 @@ Location: Zoom meeting
 Objective: Assign rolls, define scope, define vision statement 
 Team Members Present: Alexander Carrillo, Astha Thapa, Beckett Malinowski, Michael Buckendahl, Kyle Moore, Shravya Matta
 
-Rolls assigned:
+Roles assigned:
 Project Manager: Shravya Matta
 Database Designer: Michael Buckendahl
 Backend Developer: Beck Malinowski
