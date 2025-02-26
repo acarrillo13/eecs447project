@@ -18,3 +18,35 @@ Follow-Up Actions:
 Weekly check-in discord meeting to check on the progress of the project and report it between the team members
 
 Schedule the next meeting for: Tuesday 7 pm 18th Feb
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Date: February 25, 2025
+Time: 7:00 PM - 7:50 PM
+Location: Zoom meeting
+Objective: Work on the Project Deliverables 
+Team Members Present: Alexander Carrillo, Beckett Malinowski, Michael Buckendahl, Kyle Moore, Shravya Matta
+
+Project Manager: Shravya Matta
+Database Designer: Michael Buckendahl
+Backend Developer: Beck Malinowski
+Frontend Developer: Alexander Carrillo 
+Testing and QA: Kyle Moore 
+Documentation Specialist: Astha Thapa
+
+
+1. Created a shared google document and worked on the outline for the project deliverables.
+2. Dicussed about the hardware and the software requirements for the database projects.
+3. Finished the Requirements Document. 
+
+Follow-Up Actions: 
+Work assigned for Project Part 3 - 
+
+1. Introduction - Micheal Buckedahl, Astha Thapa 
+2. Identify ER Modeling Components - Beck Malinowski, Alexander Carrillo
+3. Create the ER Model - Kyle Moore, Alexander Carrillo 
+4. GitHub Repository Management - Shravya Matta
+  
+
+Scheduled the next meeting for: Tuesday 7 pm 4th March
