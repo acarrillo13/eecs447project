@@ -50,3 +50,31 @@ Work assigned for Project Part 3 -
   
 
 Scheduled the next meeting for: Tuesday 7 pm 4th March
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Date: March 11, 2025
+Time: 7:00 PM - 8:40 PM
+Location: Zoom meeting
+Objective: Work on the project ER diagram
+Team Members Present: Alexander Carrillo, Beckett Malinowski, Michael Buckendahl, Kyle Moore, Shravya Matta
+
+Project Manager: Shravya Matta
+Database Designer: Michael Buckendahl
+Backend Developer: Beck Malinowski
+Frontend Developer: Alexander Carrillo 
+Testing and QA: Kyle Moore 
+Documentation Specialist: Astha Thapa
+
+Work done during meeting:
+1. Worked collaboratively on the diagram for project 3 where Alex shared the screen and we walked through the diagrams making edits, the ER diagram was done in drawio, the file itself is in documentation
+2. The idea of a digital ticket was agreed by all. When a patron checks out the book or an item from the library a ticket will be issued (digitally) that flags that they have checked the book out. Incase of return, we can close the ticket.
+3. We are assuming the library is open and free resources for all.
+4. Unique IDs for Digital media File types for digital media
+5. Documentation for submission
+
+Follow-Up:
+1. Introduction - Micheal Buckedahl, Astha Thapa 
+2. Relational Schema mapping - Kyle Moore, Shravya Matta
+3. Relational Schema Diagram - Alexander Carrillo
+4. Schema Documentation - Beck Malinowski
+
+Next meeting: Tuesday 7 pm 25th March
