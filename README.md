@@ -3,7 +3,6 @@
 Group project repository for EECS 447
 Group documentation, code, meeting logs, ect.
 
-<<<<<<< HEAD
 BOOKNERDS' simple and efficient library management database is designed to manage crucial operations of the library. This includes functions such as cataloging all reading material, managing members and their borrowing/loan statuses and keeping users' data secure. In practice, the system will drastically improve the organization of the library.
 
 ## Table of Contents
@@ -36,13 +35,4 @@ Documentation Specialist: Astha Thapa
 - Conceptual Modeling - 03/16
 - Logical Relational Model - 03/30
 - Physical Database Design - 04/27
-- Project Desmonstration - 05/04
-=======
-Members:
-Alexander Carrillo,
-Beckett Malinowski,
-Astha Thapa,
-Michael Buckendahl,
-Kyle Moore
-Shravya Matta
->>>>>>> ac86df10b15f9ae09e0243629c41fb7c6427017b
+- Project Demonstration - 05/04
