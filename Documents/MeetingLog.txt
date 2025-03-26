@@ -96,8 +96,11 @@ Work done/ Task Accomplished in the meeting :
 1. We worked collaboratively to define the niche structure of our database tables which included adding the attributes, working on to find the primary keys as well as the foreign keys and also brushing up our functional dependencies for the project.
 2. While all of the team members were present in the meeting, Alex like always shared the screen and walked us through the diagram.
 3. Additionally, Alex also shared the google document with the rest of the team where all of us worked collaboratively for the documentation.
-4. One of the cocnerns/ questions brought up in the meeting was about the unique ids that we have planned to assign each book in the database even though they may be identical, have the same authors and is the same book but just multiple in numbers. We all agreed upon the idea that no matter how identical a book is to the other, we stand firm with the idea of assigning a unique/ distinct identification number for the book. For instance, if I check out the book 'The Great Gatsby' by F. Scott Fitzgerald (two of the same books), despite the books being the same, each of the two books will have unique id.
-5. Documentation for submission.
+4. We worked on the diagram to add the relations, attributes, primary keys, and foreign keys (for the relational schema diagram)
+5.Alex worked on the relational Schema diagram whereas Michael worked on the table while Michael also helped in finding the foreign keys for the team.
+6. One of the cocnerns/ questions brought up in the meeting was about the unique ids that we have planned to assign each book in the database even though they may be identical, have the same authors and is the same book but just multiple in numbers. We all agreed upon the idea that no matter how identical a book is to the other, we stand firm with the idea of assigning a unique/ distinct identification number for the book. For instance, if I check out the book 'The Great Gatsby' by F. Scott Fitzgerald (two of the same books), despite the books being the same, each of the two books will have unique id.
+7.Two books could have the same authors and same publication but we are assigning the books unique ids so that they can be distinct and recognized
+8. Documentation for submission.
 
 Follow-Up:
 1. Introduction - Micheal Buckedahl, Astha Thapa 
