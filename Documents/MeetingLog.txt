@@ -110,7 +110,7 @@ Follow-Up:
 
 Next Meeting : Tuesday 7pm April 8 
 --------------------------------------------------------------------------------------------------------------------------------------------
-Date: Tueday 7pm April 8 
+Date: Tuesday 7pm April 8 
 Time: 7:00 PM - 8:40 PM
 Location: Zoom meeting
 Objective: To work on the physical database of the project using the reference of previously achieved tasks
