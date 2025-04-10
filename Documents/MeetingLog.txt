@@ -26,7 +26,7 @@ Date: February 25, 2025
 Time: 7:00 PM - 7:50 PM
 Location: Zoom meeting
 Objective: Work on the Project Deliverables 
-Team Members Present: Alexander Carrillo, Beckett Malinowski, Michael Buckendahl, Kyle Moore, Shravya Matta
+Team Members Present:Astha Thapa, Alexander Carrillo, Beckett Malinowski, Michael Buckendahl, Kyle Moore, Shravya Matta
 
 Project Manager: Shravya Matta
 Database Designer: Michael Buckendahl
@@ -55,7 +55,7 @@ Date: March 11, 2025
 Time: 7:00 PM - 8:40 PM
 Location: Zoom meeting
 Objective: Work on the project ER diagram
-Team Members Present: Alexander Carrillo, Beckett Malinowski, Michael Buckendahl, Kyle Moore, Shravya Matta
+Team Members Present:Astha Thapa, Alexander Carrillo, Beckett Malinowski, Michael Buckendahl, Kyle Moore, Shravya Matta
 
 Project Manager: Shravya Matta
 Database Designer: Michael Buckendahl
@@ -83,7 +83,7 @@ Date: March 25, 2025
 Time: 7:00 PM - 8:40 PM
 Location: Zoom meeting
 Objective: Work on the conceptual model of the ER diagram
-Team Members Present: Alexander Carrillo, Beckett Malinowski, Michael Buckendahl, Kyle Moore, Shravya Matta
+Team Members Present: Astha Thapa, Alexander Carrillo, Beckett Malinowski, Michael Buckendahl, Kyle Moore, Shravya Matta
 
 Project Manager: Shravya Matta
 Database Designer: Michael Buckendahl
@@ -110,3 +110,29 @@ Follow-Up:
 
 Next Meeting : Tuesday 7pm April 8 
 --------------------------------------------------------------------------------------------------------------------------------------------
+Date: Tueday 7pm April 8 
+Time: 7:00 PM - 8:40 PM
+Location: Zoom meeting
+Objective: To work on the physical database of the project using the reference of previously achieved tasks
+Team Members Present: Alexander Carrillo, Beckett Malinowski, Michael Buckendahl, Kyle Moore, Shravya Matta
+
+Project Manager: Shravya Matta
+Database Designer: Michael Buckendahl
+Backend Developer: Beck Malinowski
+Frontend Developer: Alexander Carrillo 
+Testing and QA: Kyle Moore 
+Documentation Specialist: Astha Thapa
+
+Work done/ Task Accomplished in the meeting : 
+1. We had an indepth conversation about time stamps and  day stamps.
+2. As team, we also all agreed to take screen grapbs of the code working to use the screengrabs for testimonial purposes/ documentation of the project as it comes to life.
+3. We worked collaboratively to design a modern, user freindly system to manage the books (Resources).
+4. We were able to enable search, reservation, checkout, return and renewal process.
+5. We also implemented the digital ticketing system for tracking transactions.
+6. We were able to discuss as well as create a well structured user role ssytem to support the administrators, librarians, and general patrons.
+7. Additionally, we worked to provide comprehensive documentation including glossary, relational dictionary, and detailed schema descriptions.
+8. The screen was shared among the group members, and each of us contributed.
+9. Astha took on the role of documentation.
+
+Next Meeting : 15th April , 2025
+---------------------------------------------------------------------------------------
