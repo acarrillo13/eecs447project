@@ -1,0 +1,544 @@
+CREATE TABLE User (
+    user_id INTEGER PRIMARY KEY,
+    username VARCHAR(20) NOT NULL UNIQUE,
+    role VARCHAR(10),
+    CONSTRAINT chk_role CHECK (role IN ('Admin', 'Member')));
+   
+CREATE TABLE pays_for (
+    checkout_id INTEGER PRIMARY KEY,
+    user_id INTEGER REFERENCES User,
+    amount INTEGER NOT NULL CHECK (amount >= 0));
+  
+  
+-- would we want to change all of the timestamp values to just date?  
+-- if we do I would suggest keeping the reserve start and end as a time stamp 
+-- so the time of the day could be a tie breaker and keep it the same for download 
+-- becuase it doesnt matter 
+CREATE TABLE checks_out (
+    checkout_id INTEGER PRIMARY KEY,
+    user_id INTEGER REFERENCES User,
+    media_id varchar(10) REFERENCES Media,
+    checkout_date TIMESTAMP NOT NULL,
+    due_date TIMESTAMP NOT NULL DEFAULT (CURRENT_TIMESTAMP + INTERVAL 14 DAY),
+    return_date TIMESTAMP NULL DEFAULT NULL,
+    CONSTRAINT valid_due_date CHECK (due_date >= checkout_date),
+    CONSTRAINT valid_return_date CHECK (return_date >= checkout_date));
+    
+CREATE TABLE downloads (
+    download_id INTEGER PRIMARY KEY,
+    user_id INTEGER REFERENCES User,
+    media_id VARCHAR(10) REFERENCES Media,
+    download_date TIMESTAMP NOT NULL);
+    
+CREATE TABLE reserves (
+    reserves_id INTEGER PRIMARY KEY,
+    user_id INTEGER REFERENCES User,
+    media_id VARCHAR(10) REFERENCES Media,
+    reserve_start TIMESTAMP NOT NULL,
+    reserve_end TIMESTAMP NULL DEFAULT NULL,
+    CONSTRAINT valid_reserve_date CHECK (reserve_end >= reserve_start));
+    
+/*
+I think we should make the media id start with something
+that will tell us about what kind of media we are talking about
+so that we can then know what media table to join on, like book
+can start with BK00000001 or movie can start with MV000001 and so on.
+My suggestion is:
+Book = BK
+Movie = MV
+DigitalMedia = DM
+Magazine = MG
+*/
+CREATE TABLE Media (
+    media_id VARCHAR(10) PRIMARY KEY,
+    date_published DATE);
+    
+CREATE TABLE Book (
+    media_id varchar(10) PRIMARY KEY REFERENCES Media(media_id) ON DELETE CASCADE,
+    title VARCHAR(255) NOT NULL,
+    author VARCHAR(255),
+    genre VARCHAR(100),
+    is_reserved BOOLEAN DEFAULT FALSE
+);
+
+CREATE TABLE Movie (
+    media_id VARCHAR(10) PRIMARY KEY REFERENCES Media(media_id) ON DELETE CASCADE,
+    title VARCHAR(255) NOT NULL,
+    genre VARCHAR(100),
+    director VARCHAR(255),
+    publisher VARCHAR(255),
+    is_reserved BOOLEAN DEFAULT FALSE
+);
+
+CREATE TABLE Magazine (
+    media_id varchar(10) PRIMARY KEY REFERENCES Media(media_id) ON DELETE CASCADE,
+    volume_no INTEGER,
+    issue_no INTEGER,
+    title VARCHAR(255) NOT NULL,
+    genre VARCHAR(100),
+    publication VARCHAR(255),
+    is_reserved BOOLEAN DEFAULT FALSE
+);
+
+CREATE TABLE DigitalMedia (
+    media_id varchar(10) PRIMARY KEY REFERENCES Media(media_id) ON DELETE CASCADE,
+    title VARCHAR(255) NOT NULL,
+    genre VARCHAR(100),
+    publisher VARCHAR(255),
+    file_type VARCHAR(50),
+    CONSTRAINT chk_file_type CHECK (file_type IN ('epub', 'mp4', 'mp3', 'pdf'))
+);
+
+INSERT INTO User (user_id, username, role) VALUES (11, 'user_11', 'Admin');
+INSERT INTO User (user_id, username, role) VALUES (12, 'user_12', 'Member');
+INSERT INTO User (user_id, username, role) VALUES (13, 'user_13', 'Admin');
+INSERT INTO User (user_id, username, role) VALUES (14, 'user_14', 'Member');
+INSERT INTO User (user_id, username, role) VALUES (15, 'user_15', 'Member');
+INSERT INTO User (user_id, username, role) VALUES (16, 'user_16', 'Member');
+INSERT INTO User (user_id, username, role) VALUES (17, 'user_17', 'Member');
+INSERT INTO User (user_id, username, role) VALUES (18, 'user_18', 'Member');
+INSERT INTO User (user_id, username, role) VALUES (19, 'user_19', 'Member');
+INSERT INTO User (user_id, username, role) VALUES (20, 'user_20', 'Member');
+INSERT INTO User (user_id, username, role) VALUES (21, 'user_21', 'Member');
+INSERT INTO User (user_id, username, role) VALUES (22, 'user_22', 'Member');
+INSERT INTO User (user_id, username, role) VALUES (23, 'user_23', 'Admin');
+INSERT INTO User (user_id, username, role) VALUES (24, 'user_24', 'Member');
+INSERT INTO User (user_id, username, role) VALUES (25, 'user_25', 'Admin');
+INSERT INTO User (user_id, username, role) VALUES (26, 'user_26', 'Admin');
+INSERT INTO User (user_id, username, role) VALUES (27, 'user_27', 'Admin');
+INSERT INTO User (user_id, username, role) VALUES (28, 'user_28', 'Member');
+INSERT INTO User (user_id, username, role) VALUES (29, 'user_29', 'Admin');
+INSERT INTO User (user_id, username, role) VALUES (30, 'user_30', 'Admin');
+INSERT INTO User (user_id, username, role) VALUES (31, 'user_31', 'Admin');
+INSERT INTO User (user_id, username, role) VALUES (32, 'user_32', 'Member');
+INSERT INTO User (user_id, username, role) VALUES (33, 'user_33', 'Admin');
+INSERT INTO User (user_id, username, role) VALUES (34, 'user_34', 'Member');
+INSERT INTO User (user_id, username, role) VALUES (35, 'user_35', 'Member');
+INSERT INTO User (user_id, username, role) VALUES (36, 'user_36', 'Member');
+INSERT INTO User (user_id, username, role) VALUES (37, 'user_37', 'Admin');
+INSERT INTO User (user_id, username, role) VALUES (38, 'user_38', 'Admin');
+INSERT INTO User (user_id, username, role) VALUES (39, 'user_39', 'Admin');
+INSERT INTO User (user_id, username, role) VALUES (40, 'user_40', 'Member');
+INSERT INTO User (user_id, username, role) VALUES (41, 'user_41', 'Admin');
+INSERT INTO User (user_id, username, role) VALUES (42, 'user_42', 'Admin');
+INSERT INTO User (user_id, username, role) VALUES (43, 'user_43', 'Member');
+INSERT INTO User (user_id, username, role) VALUES (44, 'user_44', 'Admin');
+INSERT INTO User (user_id, username, role) VALUES (45, 'user_45', 'Admin');
+INSERT INTO User (user_id, username, role) VALUES (46, 'user_46', 'Member');
+INSERT INTO User (user_id, username, role) VALUES (47, 'user_47', 'Admin');
+INSERT INTO User (user_id, username, role) VALUES (48, 'user_48', 'Admin');
+INSERT INTO User (user_id, username, role) VALUES (49, 'user_49', 'Admin');
+INSERT INTO User (user_id, username, role) VALUES (50, 'user_50', 'Member');
+INSERT INTO User (user_id, username, role) VALUES (51, 'user_51', 'Admin');
+INSERT INTO User (user_id, username, role) VALUES (52, 'user_52', 'Admin');
+INSERT INTO User (user_id, username, role) VALUES (53, 'user_53', 'Admin');
+INSERT INTO User (user_id, username, role) VALUES (54, 'user_54', 'Member');
+INSERT INTO User (user_id, username, role) VALUES (55, 'user_55', 'Member');
+INSERT INTO User (user_id, username, role) VALUES (56, 'user_56', 'Member');
+INSERT INTO User (user_id, username, role) VALUES (57, 'user_57', 'Member');
+INSERT INTO User (user_id, username, role) VALUES (58, 'user_58', 'Admin');
+INSERT INTO User (user_id, username, role) VALUES (59, 'user_59', 'Member');
+INSERT INTO User (user_id, username, role) VALUES (60, 'user_60', 'Member');
+
+INSERT INTO Media (media_id, date_published) VALUES ('BK00000001', '2024-07-04');
+INSERT INTO Media (media_id, date_published) VALUES ('BK00000002', '2012-12-01');
+INSERT INTO Media (media_id, date_published) VALUES ('BK00000003', '2011-12-17');
+INSERT INTO Media (media_id, date_published) VALUES ('BK00000004', '2014-10-15');
+INSERT INTO Media (media_id, date_published) VALUES ('BK00000005', '2021-07-23');
+INSERT INTO Media (media_id, date_published) VALUES ('BK00000006', '2001-06-25');
+INSERT INTO Media (media_id, date_published) VALUES ('BK00000007', '2023-06-08');
+INSERT INTO Media (media_id, date_published) VALUES ('BK00000008', '2022-11-02');
+INSERT INTO Media (media_id, date_published) VALUES ('BK00000009', '1991-03-25');
+INSERT INTO Media (media_id, date_published) VALUES ('BK00000010', '2021-01-29');
+INSERT INTO Media (media_id, date_published) VALUES ('BK00000011', '1989-07-20');
+INSERT INTO Media (media_id, date_published) VALUES ('BK00000012', '2003-06-08');
+INSERT INTO Media (media_id, date_published) VALUES ('BK00000013', '2012-06-05');
+INSERT INTO Media (media_id, date_published) VALUES ('BK00000014', '2024-11-22');
+INSERT INTO Media (media_id, date_published) VALUES ('BK00000015', '2018-01-23');
+INSERT INTO Media (media_id, date_published) VALUES ('BK00000016', '2020-11-04');
+INSERT INTO Media (media_id, date_published) VALUES ('BK00000017', '2010-08-23');
+INSERT INTO Media (media_id, date_published) VALUES ('BK00000018', '2024-11-17');
+INSERT INTO Media (media_id, date_published) VALUES ('BK00000019', '2017-08-17');
+INSERT INTO Media (media_id, date_published) VALUES ('BK00000020', '2016-03-19');
+
+INSERT INTO Media (media_id, date_published) VALUES ('DM00000001', '2018-10-24');
+INSERT INTO Media (media_id, date_published) VALUES ('DM00000002', '2023-06-02');
+INSERT INTO Media (media_id, date_published) VALUES ('DM00000003', '2021-11-11');
+INSERT INTO Media (media_id, date_published) VALUES ('DM00000004', '2006-09-02');
+INSERT INTO Media (media_id, date_published) VALUES ('DM00000005', '2023-10-19');
+INSERT INTO Media (media_id, date_published) VALUES ('DM00000006', '2018-10-13');
+INSERT INTO Media (media_id, date_published) VALUES ('DM00000007', '2024-03-18');
+INSERT INTO Media (media_id, date_published) VALUES ('DM00000008', '2022-05-05');
+INSERT INTO Media (media_id, date_published) VALUES ('DM00000009', '2016-04-13');
+INSERT INTO Media (media_id, date_published) VALUES ('DM00000010', '2024-08-25');
+INSERT INTO Media (media_id, date_published) VALUES ('DM00000011', '2022-06-02');
+INSERT INTO Media (media_id, date_published) VALUES ('DM00000012', '2010-12-31');
+INSERT INTO Media (media_id, date_published) VALUES ('DM00000013', '1977-02-15');
+INSERT INTO Media (media_id, date_published) VALUES ('DM00000014', '2010-06-23');
+INSERT INTO Media (media_id, date_published) VALUES ('DM00000015', '2020-06-03');
+INSERT INTO Media (media_id, date_published) VALUES ('DM00000016', '1976-04-04');
+INSERT INTO Media (media_id, date_published) VALUES ('DM00000017', '2007-02-10');
+INSERT INTO Media (media_id, date_published) VALUES ('DM00000018', '2014-07-28');
+INSERT INTO Media (media_id, date_published) VALUES ('DM00000019', '2023-09-13');
+INSERT INTO Media (media_id, date_published) VALUES ('DM00000020', '1990-12-21');
+
+INSERT INTO Media (media_id, date_published) VALUES ('MG00000001', '2018-01-09');
+INSERT INTO Media (media_id, date_published) VALUES ('MG00000002', '2015-07-11');
+INSERT INTO Media (media_id, date_published) VALUES ('MG00000003', '2023-04-22');
+INSERT INTO Media (media_id, date_published) VALUES ('MG00000004', '2020-12-02');
+INSERT INTO Media (media_id, date_published) VALUES ('MG00000005', '2008-08-19');
+INSERT INTO Media (media_id, date_published) VALUES ('MG00000006', '2021-03-14');
+INSERT INTO Media (media_id, date_published) VALUES ('MG00000007', '2016-10-09');
+INSERT INTO Media (media_id, date_published) VALUES ('MG00000008', '2022-09-25');
+INSERT INTO Media (media_id, date_published) VALUES ('MG00000009', '2019-05-07');
+INSERT INTO Media (media_id, date_published) VALUES ('MG00000010', '2024-04-05');
+INSERT INTO Media (media_id, date_published) VALUES ('MG00000011', '2004-06-28');
+INSERT INTO Media (media_id, date_published) VALUES ('MG00000012', '1984-03-17');
+INSERT INTO Media (media_id, date_published) VALUES ('MG00000013', '2023-08-12');
+INSERT INTO Media (media_id, date_published) VALUES ('MG00000014', '2021-09-09');
+INSERT INTO Media (media_id, date_published) VALUES ('MG00000015', '2020-10-22');
+INSERT INTO Media (media_id, date_published) VALUES ('MG00000016', '2017-12-29');
+INSERT INTO Media (media_id, date_published) VALUES ('MG00000017', '2013-05-06');
+INSERT INTO Media (media_id, date_published) VALUES ('MG00000018', '2019-11-13');
+INSERT INTO Media (media_id, date_published) VALUES ('MG00000019', '2023-11-02');
+INSERT INTO Media (media_id, date_published) VALUES ('MG00000020', '2014-01-28');
+
+INSERT INTO Media (media_id, date_published) VALUES ('MV00000001', '2010-06-30');
+INSERT INTO Media (media_id, date_published) VALUES ('MV00000002', '2022-02-25');
+INSERT INTO Media (media_id, date_published) VALUES ('MV00000003', '2024-05-16');
+INSERT INTO Media (media_id, date_published) VALUES ('MV00000004', '2015-03-11');
+INSERT INTO Media (media_id, date_published) VALUES ('MV00000005', '2002-07-05');
+INSERT INTO Media (media_id, date_published) VALUES ('MV00000006', '2017-06-07');
+INSERT INTO Media (media_id, date_published) VALUES ('MV00000007', '2023-01-29');
+INSERT INTO Media (media_id, date_published) VALUES ('MV00000008', '2006-02-14');
+INSERT INTO Media (media_id, date_published) VALUES ('MV00000009', '2021-06-12');
+INSERT INTO Media (media_id, date_published) VALUES ('MV00000010', '2019-03-22');
+INSERT INTO Media (media_id, date_published) VALUES ('MV00000011', '2016-05-01');
+INSERT INTO Media (media_id, date_published) VALUES ('MV00000012', '2022-08-19');
+INSERT INTO Media (media_id, date_published) VALUES ('MV00000013', '2018-09-04');
+INSERT INTO Media (media_id, date_published) VALUES ('MV00000014', '2023-05-27');
+INSERT INTO Media (media_id, date_published) VALUES ('MV00000015', '2000-11-08');
+INSERT INTO Media (media_id, date_published) VALUES ('MV00000016', '1982-04-23');
+INSERT INTO Media (media_id, date_published) VALUES ('MV00000017', '2021-10-10');
+INSERT INTO Media (media_id, date_published) VALUES ('MV00000018', '2014-08-30');
+INSERT INTO Media (media_id, date_published) VALUES ('MV00000019', '1997-12-06');
+INSERT INTO Media (media_id, date_published) VALUES ('MV00000020', '2024-03-09');
+
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (11, 54, 'MG00000009', '2023-04-30 20:15:51', '2023-05-14 20:15:51', '2023-05-06 20:15:51');
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (12, 48, 'MG00000005', '2025-02-01 07:49:07', '2025-02-15 07:49:07', NULL);
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (14, 38, 'BK00000012', '2024-01-16 07:38:01', '2024-01-30 07:38:01', '2024-01-20 07:38:01');
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (16, 13, 'MG00000004', '2024-06-30 23:17:42', '2024-07-14 23:17:42', NULL);
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (18, 51, 'MG00000014', '2023-08-01 02:28:52', '2023-08-15 02:28:52', '2023-08-15 02:28:52');
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (19, 33, 'MG00000018', '2023-09-13 17:06:13', '2023-09-27 17:06:13', '2023-09-21 17:06:13');
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (20, 57, 'BK00000004', '2023-09-11 15:05:38', '2023-09-25 15:05:38', '2023-09-16 15:05:38');
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (21, 32, 'MG00000013', '2024-06-25 00:41:46', '2024-07-09 00:41:46', '2024-06-26 00:41:46');
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (22, 20, 'BK00000006', '2023-07-22 19:34:22', '2023-08-05 19:34:22', '2023-07-24 19:34:22');
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (23, 51, 'MG00000012', '2024-08-13 05:12:16', '2024-08-27 05:12:16', NULL);
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (25, 41, 'MG00000014', '2024-12-14 21:52:17', '2024-12-28 21:52:17', NULL);
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (30, 18, 'MG00000018', '2024-06-20 11:37:18', '2024-07-04 11:37:18', '2024-07-04 11:37:18');
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (31, 38, 'BK00000009', '2023-05-31 16:53:11', '2023-06-14 16:53:11', NULL);
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (32, 45, 'BK00000019', '2023-07-31 13:15:45', '2023-08-14 13:15:45', NULL);
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (35, 20, 'MG00000001', '2024-01-16 19:14:13', '2024-01-30 19:14:13', '2024-02-04 19:14:13');
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (37, 15, 'BK00000001', '2024-08-01 08:16:44', '2024-08-15 08:16:44', NULL);
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (38, 45, 'BK00000006', '2024-11-20 03:19:10', '2024-12-04 03:19:10', '2024-11-30 03:19:10');
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (40, 22, 'MG00000016', '2025-02-03 11:44:04', '2025-02-17 11:44:04', '2025-02-04 11:44:04');
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (41, 39, 'BK00000002', '2024-12-13 02:27:51', '2024-12-27 02:27:51', '2024-12-22 02:27:51');
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (43, 50, 'BK00000010', '2023-08-13 11:11:23', '2023-08-27 11:11:23', '2023-08-26 11:11:23');
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (44, 38, 'MG00000013', '2024-06-24 01:58:24', '2024-07-08 01:58:24', NULL);
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (46, 14, 'BK00000005', '2024-04-09 15:23:51', '2024-04-23 15:23:51', NULL);
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (48, 33, 'MG00000008', '2024-10-06 16:53:10', '2024-10-20 16:53:10', '2024-10-13 16:53:10');
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (49, 13, 'MG00000003', '2025-01-10 12:25:27', '2025-01-24 12:25:27', NULL);
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (50, 46, 'BK00000009', '2023-09-20 05:10:11', '2023-10-04 05:10:11', '2023-10-06 05:10:11');
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (52, 11, 'BK00000013', '2023-05-27 12:39:41', '2023-06-10 12:39:41', NULL);
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (53, 60, 'BK00000008', '2024-09-02 04:20:40', '2024-09-16 04:20:40', '2024-09-11 04:20:40');
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (54, 35, 'BK00000013', '2024-10-26 18:17:29', '2024-11-09 18:17:29', '2024-11-14 18:17:29');
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (55, 43, 'MG00000004', '2024-02-04 23:46:59', '2024-02-18 23:46:59', NULL);
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (56, 20, 'MG00000009', '2023-09-09 19:19:50', '2023-09-23 19:19:50', '2023-09-13 19:19:50');
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (57, 18, 'BK00000019', '2024-03-27 03:08:53', '2024-04-10 03:08:53', NULL);
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (58, 35, 'MG00000015', '2025-01-09 09:05:55', '2025-01-23 09:05:55', '2025-01-14 09:05:55');
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (59, 37, 'BK00000019', '2023-09-22 07:06:42', '2023-10-06 07:06:42', NULL);
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (62, 59, 'MG00000004', '2025-01-06 13:17:25', '2025-01-20 13:17:25', NULL);
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (63, 44, 'BK00000020', '2024-12-08 08:39:15', '2024-12-22 08:39:15', NULL);
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (66, 53, 'BK00000012', '2024-08-31 01:14:59', '2024-09-14 01:14:59', '2024-09-13 01:14:59');
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (67, 38, 'BK00000017', '2024-11-26 18:02:12', '2024-12-10 18:02:12', '2024-12-09 18:02:12');
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (68, 60, 'BK00000013', '2023-12-04 04:27:43', '2023-12-18 04:27:43', '2023-12-07 04:27:43');
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (70, 27, 'BK00000017', '2023-05-24 17:55:17', '2023-06-07 17:55:17', '2023-06-10 17:55:17');
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (71, 35, 'BK00000005', '2023-05-23 10:41:50', '2023-06-06 10:41:50', NULL);
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (72, 15, 'MG00000019', '2024-11-20 17:30:01', '2024-12-04 17:30:01', NULL);
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (74, 14, 'MG00000015', '2023-07-27 10:56:09', '2023-08-10 10:56:09', NULL);
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (75, 32, 'MV00000013', '2024-09-10 16:10:38', '2024-09-24 16:10:38', '2024-09-30 16:10:38');
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (78, 55, 'MV00000001', '2024-02-14 06:59:08', '2024-02-28 06:59:08', '2024-02-16 06:59:08');
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (79, 16, 'MV00000001', '2024-05-25 05:54:11', '2024-06-08 05:54:11', '2024-06-05 05:54:11');
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (80, 42, 'MV00000013', '2024-06-27 15:58:49', '2024-07-11 15:58:49', '2024-07-06 15:58:49');
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (81, 20, 'MV00000009', '2023-09-09 19:19:50', '2023-09-23 19:19:50', '2023-09-13 19:19:50');
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (82, 18, 'MV00000019', '2024-03-27 03:08:53', '2024-04-10 03:08:53', NULL);
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (83, 35, 'MV00000015', '2025-01-09 09:05:55', '2025-01-23 09:05:55', '2025-01-14 09:05:55');
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (84, 37, 'MV00000019', '2023-09-22 07:06:42', '2023-10-06 07:06:42', NULL);
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (85, 59, 'MV00000004', '2025-01-06 13:17:25', '2025-01-20 13:17:25', NULL);
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (86, 44, 'MV00000020', '2024-12-08 08:39:15', '2024-12-22 08:39:15', NULL);
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (87, 53, 'MV00000012', '2024-08-31 01:14:59', '2024-09-14 01:14:59', '2024-09-13 01:14:59');
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (88, 38, 'MV00000017', '2024-11-26 18:02:12', '2024-12-10 18:02:12', '2024-12-09 18:02:12');
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (89, 60, 'MV00000013', '2023-12-04 04:27:43', '2023-12-18 04:27:43', '2023-12-07 04:27:43');
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (90, 27, 'MV00000017', '2023-05-24 17:55:17', '2023-06-07 17:55:17', '2023-06-10 17:55:17');
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (91, 35, 'MV00000005', '2023-05-23 10:41:50', '2023-06-06 10:41:50', NULL);
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (92, 15, 'MV00000019', '2024-11-20 17:30:01', '2024-12-04 17:30:01', NULL);
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (93, 14, 'MV00000015', '2023-07-27 10:56:09', '2023-08-10 10:56:09', NULL);
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (94, 28, 'BK00000003', '2023-06-01 10:00:00', '2023-06-15 10:00:00', '2023-06-18 10:00:00');
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (95, 36, 'BK00000007', '2024-02-20 13:30:00', '2024-03-05 13:30:00', '2024-03-10 13:30:00');
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (96, 21, 'BK00000011', '2023-12-01 09:00:00', '2023-12-15 09:00:00', '2023-12-20 09:00:00');
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (97, 19, 'BK00000014', '2024-10-10 15:20:00', '2024-10-24 15:20:00', '2024-10-30 15:20:00');
+INSERT INTO checks_out (checkout_id, user_id, media_id, checkout_date, due_date, return_date) VALUES (98, 31, 'BK00000015', '2023-03-05 14:45:00', '2023-03-19 14:45:00', '2023-03-25 14:45:00'); 
+
+INSERT INTO pays_for (checkout_id, user_id, amount) VALUES (50, 46, 2);
+INSERT INTO pays_for (checkout_id, user_id, amount) VALUES (54, 35, 5);
+INSERT INTO pays_for (checkout_id, user_id, amount) VALUES (70, 27, 3);
+INSERT INTO pays_for (checkout_id, user_id, amount) VALUES (75, 32, 6);
+INSERT INTO pays_for (checkout_id, user_id, amount) VALUES (90, 27, 3);
+INSERT INTO pays_for (checkout_id, user_id, amount) VALUES (94, 28, 3);
+INSERT INTO pays_for (checkout_id, user_id, amount) VALUES (95, 36, 5);
+
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (1, 54, 'DM00000003', '2024-04-15 12:37:56');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (2, 52, 'DM00000011', '2024-08-27 01:01:54');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (3, 38, 'DM00000015', '2024-12-02 14:26:49');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (4, 19, 'DM00000009', '2024-11-28 03:17:14');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (5, 59, 'DM00000004', '2024-12-04 10:37:37');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (6, 22, 'DM00000016', '2024-09-01 14:07:55');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (7, 33, 'DM00000019', '2024-08-21 12:28:22');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (8, 22, 'DM00000015', '2024-09-03 12:12:01');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (9, 28, 'DM00000019', '2024-10-18 17:15:58');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (10, 27, 'DM00000005', '2024-05-10 02:50:35');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (11, 49, 'DM00000012', '2024-10-16 04:34:51');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (12, 38, 'DM00000014', '2024-06-01 21:44:30');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (13, 45, 'DM00000001', '2024-11-28 06:53:25');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (14, 49, 'DM00000007', '2025-02-07 03:48:12');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (15, 13, 'DM00000018', '2024-12-15 07:27:41');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (16, 54, 'DM00000019', '2024-11-07 16:07:59');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (17, 58, 'DM00000008', '2024-11-23 21:25:28');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (18, 29, 'DM00000003', '2024-12-08 03:55:35');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (19, 21, 'DM00000011', '2024-08-01 19:29:33');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (20, 41, 'DM00000014', '2025-03-15 14:58:03');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (21, 43, 'DM00000014', '2025-01-16 22:09:23');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (22, 25, 'DM00000011', '2024-05-01 17:29:24');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (23, 12, 'DM00000020', '2024-05-07 07:30:57');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (24, 49, 'DM00000012', '2024-10-09 00:08:05');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (25, 57, 'DM00000011', '2024-06-16 01:05:39');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (26, 38, 'DM00000006', '2024-04-04 00:21:00');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (27, 14, 'DM00000001', '2024-12-19 19:40:45');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (28, 19, 'DM00000001', '2024-12-24 09:52:42');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (29, 27, 'DM00000005', '2025-01-04 04:24:15');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (30, 46, 'DM00000012', '2024-11-29 10:14:46');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (31, 17, 'DM00000010', '2025-02-04 05:27:25');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (32, 16, 'DM00000006', '2025-01-01 09:19:12');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (33, 18, 'DM00000009', '2024-11-03 23:24:52');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (34, 22, 'DM00000009', '2024-04-13 11:54:22');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (35, 43, 'DM00000005', '2024-06-14 19:07:45');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (36, 32, 'DM00000006', '2024-10-19 23:26:24');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (37, 16, 'DM00000013', '2024-11-06 14:17:13');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (38, 36, 'DM00000019', '2024-08-22 01:51:10');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (39, 35, 'DM00000016', '2024-08-20 01:19:54');
+INSERT INTO downloads (download_id, user_id, media_id, download_date) VALUES (40, 40, 'DM00000018', '2024-09-08 13:15:07');
+
+
+INSERT INTO reserves (reserves_id, user_id, media_id, reserve_start, reserve_end) VALUES (00, 24, 'MG00000018', '2024-08-18 00:38:41', '2024-09-01 00:38:41');
+INSERT INTO reserves (reserves_id, user_id, media_id, reserve_start, reserve_end) VALUES (01, 42, 'BK00000004', '2025-01-06 06:50:48', '2025-01-15 06:50:48');
+INSERT INTO reserves (reserves_id, user_id, media_id, reserve_start, reserve_end) VALUES (04, 23, 'MG00000015', '2024-04-10 06:37:23', '2024-04-16 06:37:23');
+INSERT INTO reserves (reserves_id, user_id, media_id, reserve_start, reserve_end) VALUES (06, 43, 'MG00000016', '2025-01-02 16:25:28', '2025-01-12 16:25:28');
+INSERT INTO reserves (reserves_id, user_id, media_id, reserve_start, reserve_end) VALUES (07, 28, 'MG00000018', '2024-07-15 13:17:51', '2024-07-23 13:17:51');
+INSERT INTO reserves (reserves_id, user_id, media_id, reserve_start, reserve_end) VALUES (08, 53, 'BK00000011', '2024-06-27 08:26:35', '2024-07-03 08:26:35');
+INSERT INTO reserves (reserves_id, user_id, media_id, reserve_start, reserve_end) VALUES (09, 37, 'MG00000018', '2024-09-26 02:22:25', '2024-10-10 02:22:25');
+INSERT INTO reserves (reserves_id, user_id, media_id, reserve_start, reserve_end) VALUES (10, 26, 'BK00000007', '2024-07-29 02:15:14', NULL);
+INSERT INTO reserves (reserves_id, user_id, media_id, reserve_start, reserve_end) VALUES (12, 51, 'MG00000018', '2024-11-02 15:07:57', NULL);
+INSERT INTO reserves (reserves_id, user_id, media_id, reserve_start, reserve_end) VALUES (13, 53, 'BK00000003', '2024-12-12 07:03:48', '2024-12-18 07:03:48');
+INSERT INTO reserves (reserves_id, user_id, media_id, reserve_start, reserve_end) VALUES (14, 60, 'MG00000004', '2024-11-28 11:59:15', NULL);
+INSERT INTO reserves (reserves_id, user_id, media_id, reserve_start, reserve_end) VALUES (15, 49, 'MG00000005', '2025-01-12 06:50:23', '2025-01-21 06:50:23');
+INSERT INTO reserves (reserves_id, user_id, media_id, reserve_start, reserve_end) VALUES (16, 15, 'BK00000012', '2024-11-14 23:49:39', NULL);
+INSERT INTO reserves (reserves_id, user_id, media_id, reserve_start, reserve_end) VALUES (17, 27, 'BK00000008', '2024-06-19 17:15:29', '2024-07-03 17:15:29');
+INSERT INTO reserves (reserves_id, user_id, media_id, reserve_start, reserve_end) VALUES (18, 27, 'MV00000008', '2024-08-18 00:38:41', '2024-09-01 00:38:41');
+INSERT INTO reserves (reserves_id, user_id, media_id, reserve_start, reserve_end) VALUES (19, 27, 'MV00000008', '2024-07-29 02:15:14', NULL);
+INSERT INTO reserves (reserves_id, user_id, media_id, reserve_start, reserve_end) VALUES (20, 27, 'MV00000009', '2024-11-02 15:07:57', NULL);
+INSERT INTO reserves (reserves_id, user_id, media_id, reserve_start, reserve_end) VALUES (21, 27, 'MV00000012', '2024-04-10 06:37:23', '2024-04-16 06:37:23');
+INSERT INTO reserves (reserves_id, user_id, media_id, reserve_start, reserve_end) VALUES (22, 27, 'MV00000020', '2024-11-02 15:07:57', NULL);
+                                                                                          
+
+
+INSERT INTO Book (media_id, title, author, genre, is_reserved) VALUES
+('BK00000001', 'The Silent Grove', 'Alice Monroe', 'Fiction', FALSE),
+('BK00000002', 'Quantum Drift', 'Eric Thomas', 'Sci-Fi', FALSE),
+('BK00000003', 'Legends of Stone', 'Lily Andrews', 'Fantasy', TRUE),
+('BK00000004', 'Ethics Engine', 'Dr. John Carter', 'Non-fiction', FALSE),
+('BK00000005', 'Shadow Signal', 'Dan Blake', 'Mystery', TRUE),
+('BK00000006', 'Echoes of Time', 'Maggie Liu', 'Fiction', FALSE),
+('BK00000007', 'Crimson Sky', 'Tina Ray', 'Fantasy', FALSE),
+('BK00000008', 'Digital Mirage', 'James Noland', 'Sci-Fi', FALSE),
+('BK00000009', 'Beneath the Ashes', 'Veronica Greene', 'Mystery', TRUE),
+('BK00000010', 'Gravity’s Kiss', 'Isabel Young', 'Fiction', FALSE),
+('BK00000011', 'The Star Ledger', 'Hank Jefferson', 'Sci-Fi', FALSE),
+('BK00000012', 'Mindbreaker', 'Liam Drake', 'Fantasy', TRUE),
+('BK00000013', 'Voices of Tomorrow', 'Nina White', 'Non-fiction', FALSE),
+('BK00000014', 'A Thousand Dreams', 'Sophia Kim', 'Fiction', FALSE),
+('BK00000015', 'Deep Protocol', 'Ravi Patel', 'Sci-Fi', TRUE),
+('BK00000016', 'Suburban Myths', 'Zara Lopez', 'Fiction', FALSE),
+('BK00000017', 'Coded Lies', 'Nathan Grey', 'Mystery', FALSE),
+('BK00000018', 'Legacy of Light', 'Rachel Lim', 'Fantasy', TRUE),
+('BK00000019', 'Hidden Datastream', 'Carlos Vega', 'Non-fiction', FALSE),
+('BK00000020', 'The Whispered Word', 'Debra Ford', 'Mystery', FALSE);
+
+INSERT INTO Movie (media_id, title, genre, director, publisher, is_reserved) VALUES
+('MV00000001', 'Echoes in the Void', 'Sci-Fi', 'Mia Turner', 'SilverScreen Studios', FALSE),
+('MV00000002', 'Neon Skies', 'Sci-Fi', 'Kevin Wright', 'Galaxy Films', FALSE),
+('MV00000003', 'The Final Tune', 'Romance', 'Eliza Stone', 'NoteLine Pictures', FALSE),
+('MV00000004', 'Black Code', 'Thriller', 'Marcus Lee', 'ThrillNet', TRUE),
+('MV00000005', 'Parallel Earths', 'Sci-Fi', 'Nora Diaz', 'CosmoMedia', FALSE),
+('MV00000006', 'Haunted Grid', 'Horror', 'Felix Grant', 'DarkVault Films', TRUE),
+('MV00000007', 'Life of Waves', 'Documentary', 'Tasha Moore', 'Ocean View', FALSE),
+('MV00000008', 'Echo Chamber', 'Mystery', 'Jon Nguyen', 'Indie Circuit', FALSE),
+('MV00000009', 'Forgotten Frames', 'Drama', 'Alex Johnson', 'FrameHouse', FALSE),
+('MV00000010', 'CyberThief', 'Action', 'Maria Yu', 'HackReel Studios', TRUE),
+('MV00000011', 'Glitched Reality', 'Sci-Fi', 'Iris Fields', 'Virtual Realm', FALSE),
+('MV00000012', 'Dust and Rain', 'Drama', 'Cole Anderson', 'Visionaire Films', FALSE),
+('MV00000013', 'Mindwave', 'Thriller', 'Angela Smith', 'PulseTV', FALSE),
+('MV00000014', 'Love in Code', 'Romance', 'Jacob Lin', 'HeartBit Films', TRUE),
+('MV00000015', 'Rogue Galaxy', 'Sci-Fi', 'Yasmine King', 'Universal Future', FALSE),
+('MV00000016', 'The Cellar Door', 'Horror', 'Darren Wolfe', 'Cryptic Films', FALSE),
+('MV00000017', 'Voices Over Time', 'Drama', 'Ella Martin', 'RetroFrame', TRUE),
+('MV00000018', 'Encrypted', 'Thriller', 'Tommy Graves', 'SecureFlicks', FALSE),
+('MV00000019', 'Between Dimensions', 'Sci-Fi', 'Rei Hayashi', 'Quantum Cinema', FALSE),
+('MV00000020', 'Solar Drift', 'Adventure', 'Kelly Owens', 'Orbital Media', FALSE);
+
+INSERT INTO Magazine (media_id, volume_no, issue_no, title, genre, publication, is_reserved) VALUES
+('MG00000001', 12, 1, 'Tech Today', 'Technology', 'Info Digest', FALSE),
+('MG00000002', 9, 3, 'Science World', 'Science', 'Global Science', FALSE),
+('MG00000003', 5, 2, 'ArtBeat', 'Art', 'Color Press', TRUE),
+('MG00000004', 3, 6, 'History Monthly', 'History', 'Past & Present Co.', FALSE),
+('MG00000005', 7, 1, 'Fitness Focus', 'Health', 'Wellness Works', FALSE),
+('MG00000006', 4, 5, 'Eco View', 'Environment', 'GreenFuture', TRUE),
+('MG00000007', 6, 12, 'Culinary Trends', 'Cooking', 'Flavor Publishers', FALSE),
+('MG00000008', 10, 2, 'Business Lens', 'Business', 'Market Media', FALSE),
+('MG00000009', 8, 7, 'Auto Today', 'Automotive', 'MotorWorks', FALSE),
+('MG00000010', 2, 4, 'Urban Style', 'Lifestyle', 'CityPrint', TRUE),
+('MG00000011', 15, 11, 'GamerZone', 'Gaming', 'Pixel Press', FALSE),
+('MG00000012', 11, 10, 'The Analyst', 'Finance', 'WallFin', FALSE),
+('MG00000013', 6, 3, 'Explorer', 'Travel', 'Wanderlust Media', FALSE),
+('MG00000014', 1, 9, 'EduNation', 'Education', 'EduCore Press', FALSE),
+('MG00000015', 7, 8, 'Next Gen Tech', 'Technology', 'TechForge', TRUE),
+('MG00000016', 3, 6, 'The Garden Gate', 'Gardening', 'PlantHouse', FALSE),
+('MG00000017', 9, 2, 'Mind Matters', 'Psychology', 'BrainHub', TRUE),
+('MG00000018', 14, 5, 'Cinema Scope', 'Entertainment', 'Reel Ink', FALSE),
+('MG00000019', 8, 4, 'The Writer''s Den', 'Literature', 'Pen & Paper', FALSE),
+('MG00000020', 10, 1, 'Digital Culture', 'Culture', 'Viral Vox', FALSE);
+
+INSERT INTO DigitalMedia (media_id, title, genre, publisher, file_type) VALUES
+('DM00000001', 'Cognition Rebooted', 'Sci-Fi', 'NeoVerse Media', 'epub'),
+('DM00000002', 'Haunted Signals', 'Horror', 'NightByte', 'mp4'),
+('DM00000003', 'Mindful Minutes', 'Health', 'Serenity Pub', 'mp3'),
+('DM00000004', 'Urban Beats', 'Music', 'CitySounds', 'mp3'),
+('DM00000005', 'The Startup Bible', 'Business', 'LaunchMedia', 'pdf'),
+('DM00000006', 'Digital Nomads', 'Travel', 'Global Footsteps', 'epub'),
+('DM00000007', 'Hacktivist Echo', 'Tech', 'ByteWorld', 'pdf'),
+('DM00000008', 'AI Dreams', 'Sci-Fi', 'Singularity Hub', 'epub'),
+('DM00000009', 'True Crime Files', 'Crime', 'Grit Media', 'mp4'),
+('DM00000010', 'Ocean Wonders', 'Nature', 'DeepSea Vision', 'mp4'),
+('DM00000011', 'Smart Cooking', 'Cooking', 'Kitchen Code', 'pdf'),
+('DM00000012', 'Life in 2040', 'Futurism', 'TimeShift', 'epub'),
+('DM00000013', 'Meditation Daily', 'Wellness', 'Zen Media', 'mp3'),
+('DM00000014', 'Financial Toolkit', 'Finance', 'MoneyCraft', 'pdf'),
+('DM00000015', 'Virtual Realms', 'Gaming', 'GameNet', 'mp4'),
+('DM00000016', 'Mars Chronicles', 'Sci-Fi', 'RedDust Studios', 'epub'),
+('DM00000017', 'Eco Living', 'Environment', 'GreenHouse', 'pdf'),
+('DM00000018', 'Digital Fashion', 'Fashion', 'TrendForge', 'pdf'),
+('DM00000019', 'The Future Mind', 'Neuroscience', 'NeuroPub', 'epub'),
+('DM00000020', 'Quiet Forests', 'Nature', 'Calm Earth', 'mp4');
+
+
+-- To get the Database to work only copy the above section
+/*
+Possible Queries
+select C.user_id, C.checkout_id
+from checks_out C
+where return_date > due_date
+and C.checkout_id not in (select P.checkout_id from pays_for P);
+
+-- User checks out a book
+INSERT INTO checks_out (user_id, media_id, checkout_date, due_date)
+VALUES (?, ?, CURDATE(), CURDATE() + INTERVAL 14 DAY);
+
+-- User returns the book 
+UPDATE checks_out
+SET return_date = CURDATE()
+WHERE media_id = ? AND return_date IS NULL;
+
+-- All active checked out books
+SELECT * FROM checks_out
+WHERE return_date IS NULL;
+
+
+-- All over due items
+SELECT * FROM checks_out
+WHERE return_date IS NULL AND due_date < CURDATE();
+
+
+-- To get all the check_outs from the user in the last month
+SELECT *
+FROM check_outs
+WHERE user_id = ? 
+  AND checkout_date >= CURDATE() - INTERVAL 1 MONTH;
+
+
+-- To see how many times a piece of DigitalMedia has been downloaded
+SELECT COUNT(*)
+FROM downloads
+WHERE media_id = ?;
+
+-- This assumes that we will charge the user $1 for every day overdue
+-- To caclulate all the users current fees 
+SELECT user_id, media_id, DATEDIFF(CURDATE(), due_date) AS overdue_amount
+FROM checks_out
+WHERE due_date < CURDATE() 
+AND return_date is null
+AND user_id = ?;
+
+-- To get all the ____ from the ___ type of media
+SELECT *
+FROM Book;
+
+SELECT *
+FROM Movie;
+
+SELECT *
+FROM Magazine
+
+SELECT * 
+FROM DigitalMedia
+
+-- To get all the users checked out media
+SELECT c.user_id, c.media_id, 'Book' AS media_type, b.title, b.genre, NULL AS director, NULL AS publisher
+FROM checks_out c
+JOIN Book b ON c.media_id = b.media_id
+
+UNION ALL
+
+SELECT c.user_id, c.media_id, 'Movie' AS media_type, mv.title, mv.genre, mv.director, mv.publisher
+FROM checks_out c
+JOIN Movie mv ON c.media_id = mv.media_id
+
+UNION ALL
+
+SELECT c.user_id, c.media_id, 'Magazine' AS media_type, mg.title, mg.genre, NULL AS director, mg.publication AS publisher
+FROM checks_out c
+JOIN Magazine mg ON c.media_id = mg.media_id
+
+UNION ALL
+
+SELECT d.user_id, d.media_id, 'DigitalMedia' AS media_type, dm.title, dm.genre, NULL AS director, dm.publisher
+FROM downloads d
+JOIN DigitalMedia dm ON d.media_id = dm.media_id
+
+WHERE d.user_id = ?;
+
+-- to get all the reservations that could be ended
+-- meaning the reserved book is now avail
+select r.reserves_id, r.media_id, b.title
+from reserves r
+join Book b on b.media_id = r.media_id
+where is_reserved = false and reserve_end is null;
+*/
