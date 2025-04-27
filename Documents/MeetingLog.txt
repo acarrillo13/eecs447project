@@ -26,7 +26,7 @@ Date: February 25, 2025
 Time: 7:00 PM - 7:50 PM
 Location: Zoom meeting
 Objective: Work on the Project Deliverables 
-Team Members Present: Alexander Carrillo, Beckett Malinowski, Michael Buckendahl, Kyle Moore, Shravya Matta
+Team Members Present:Astha Thapa, Alexander Carrillo, Beckett Malinowski, Michael Buckendahl, Kyle Moore, Shravya Matta
 
 Project Manager: Shravya Matta
 Database Designer: Michael Buckendahl
@@ -55,7 +55,7 @@ Date: March 11, 2025
 Time: 7:00 PM - 8:40 PM
 Location: Zoom meeting
 Objective: Work on the project ER diagram
-Team Members Present: Alexander Carrillo, Beckett Malinowski, Michael Buckendahl, Kyle Moore, Shravya Matta
+Team Members Present:Astha Thapa, Alexander Carrillo, Beckett Malinowski, Michael Buckendahl, Kyle Moore, Shravya Matta
 
 Project Manager: Shravya Matta
 Database Designer: Michael Buckendahl
@@ -78,3 +78,61 @@ Follow-Up:
 4. Schema Documentation - Beck Malinowski
 
 Next meeting: Tuesday 7 pm 25th March
+------------------------------------------------------------------------------------------------------------------------------------------
+Date: March 25, 2025
+Time: 7:00 PM - 8:40 PM
+Location: Zoom meeting
+Objective: Work on the conceptual model of the ER diagram
+Team Members Present: Astha Thapa, Alexander Carrillo, Beckett Malinowski, Michael Buckendahl, Kyle Moore, Shravya Matta
+
+Project Manager: Shravya Matta
+Database Designer: Michael Buckendahl
+Backend Developer: Beck Malinowski
+Frontend Developer: Alexander Carrillo 
+Testing and QA: Kyle Moore 
+Documentation Specialist: Astha Thapa
+
+Work done/ Task Accomplished in the meeting : 
+1. We worked collaboratively to define the niche structure of our database tables which included adding the attributes, working on to find the primary keys as well as the foreign keys and also brushing up our functional dependencies for the project.
+2. While all of the team members were present in the meeting, Alex like always shared the screen and walked us through the diagram.
+3. Additionally, Alex also shared the google document with the rest of the team where all of us worked collaboratively for the documentation.
+4. We worked on the diagram to add the relations, attributes, primary keys, and foreign keys (for the relational schema diagram)
+5.Alex worked on the relational Schema diagram whereas Michael worked on the table while Michael also helped in finding the foreign keys for the team.
+6. One of the cocnerns/ questions brought up in the meeting was about the unique ids that we have planned to assign each book in the database even though they may be identical, have the same authors and is the same book but just multiple in numbers. We all agreed upon the idea that no matter how identical a book is to the other, we stand firm with the idea of assigning a unique/ distinct identification number for the book. For instance, if I check out the book 'The Great Gatsby' by F. Scott Fitzgerald (two of the same books), despite the books being the same, each of the two books will have unique id.
+7.Two books could have the same authors and same publication but we are assigning the books unique ids so that they can be distinct and recognized
+8. Documentation for submission.
+
+Follow-Up:
+1. Introduction - Micheal Buckedahl, Astha Thapa 
+2. Relational Schema mapping - Kyle Moore, Shravya Matta
+3. Relational Schema Diagram - Alexander Carrillo
+4. Schema Documentation - Beck Malinowski
+
+Next Meeting : Tuesday 7pm April 8 
+--------------------------------------------------------------------------------------------------------------------------------------------
+Date: Tuesday 7pm April 8 
+Time: 7:00 PM - 8:40 PM
+Location: Zoom meeting
+Objective: To work on the physical database of the project using the reference of previously achieved tasks
+Team Members Present: Alexander Carrillo, Beckett Malinowski, Michael Buckendahl, Kyle Moore, Shravya Matta
+
+Project Manager: Shravya Matta
+Database Designer: Michael Buckendahl
+Backend Developer: Beck Malinowski
+Frontend Developer: Alexander Carrillo 
+Testing and QA: Kyle Moore 
+Documentation Specialist: Astha Thapa
+
+Work done/ Task Accomplished in the meeting : 
+1. We had an indepth conversation about time stamps and  day stamps.
+2. As team, we also all agreed to take screen grapbs of the code working to use the screengrabs for testimonial purposes/ documentation of the project as it comes to life.
+3. We worked collaboratively to design a modern, user freindly system to manage the books (Resources).
+4. We were able to enable search, reservation, checkout, return and renewal process.
+5. We also implemented the digital ticketing system for tracking transactions.
+6. We were able to discuss as well as create a well structured user role ssytem to support the administrators, librarians, and general patrons.
+7. Additionally, we worked to provide comprehensive documentation including glossary, relational dictionary, and detailed schema descriptions.
+8. The screen was shared among the group members, and each of us contributed.
+9. Astha took on the role of documentation.
+
+Next Meeting : 15th April , 2025
+---------------------------------------------------------------------------------------
