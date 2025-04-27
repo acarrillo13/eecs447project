@@ -114,6 +114,10 @@ Date: Tuesday 7pm April 8
 Time: 7:00 PM - 8:40 PM
 Location: Zoom meeting
 Objective: To work on the physical database of the project using the reference of previously achieved tasks
+Team Members Present:Astha Thapa, Alexander CarrilloDate: Tuesday 7pm April 8 
+Time: 7:00 PM - 8:40 PM
+Location: Zoom meeting
+Objective: To work on the physical database of the project using the reference of previously achieved tasks
 Team Members Present: Alexander Carrillo, Beckett Malinowski, Michael Buckendahl, Kyle Moore, Shravya Matta
 
 Project Manager: Shravya Matta
@@ -134,5 +138,47 @@ Work done/ Task Accomplished in the meeting :
 8. The screen was shared among the group members, and each of us contributed.
 9. Astha took on the role of documentation.
 
-Next Meeting : 15th April , 2025
+Next Meeting : 15th April , 2025, Michael Buckendahl, Kyle Moore, Shravya Matta
+
+Project Manager: Shravya Matta
+Database Designer: Michael Buckendahl
+Backend Developer: Beck Malinowski
+Frontend Developer: Alexander Carrillo 
+Testing and QA: Kyle Moore 
+Documentation Specialist: Astha Thapa
+
+Work done/ Task Accomplished in the meeting : 
+1. We had an indepth conversation about time stamps and  day stamps.
+2. As team, we also all agreed to take screen grapbs of the code working to use the screengrabs for testimonial purposes/ documentation of the project as it comes to life.
+3. We worked collaboratively to design a modern, user freindly system to manage the books (Resources).
+4. We were able to enable search, reservation, checkout, return and renewal process.
+5. We also implemented the digital ticketing system for tracking transactions.
+6. We were able to discuss as well as create a well structured user role ssytem to support the administrators, librarians, and general patrons.
+7. Additionally, we worked to provide comprehensive documentation including glossary, relational dictionary, and detailed schema descriptions.
+8. The screen was shared among the group members, and each of us contributed.
+9. Astha took on the role of documentation.
+
+Next Meeting : 27th April , 2025
 ---------------------------------------------------------------------------------------
+Date: Sunday 5pm April 27
+Time: 5:00 PM - 5:20 PM
+Location: Zoom meeting
+Objective: To work on the physical database of the project using the reference of previously achieved tasks
+Team Members Present: Alexander Carrillo, Michael Buckendahl, Kyle Moore, Shravya Matta
+
+Project Manager: Shravya Matta
+Database Designer: Michael Buckendahl
+Backend Developer: Beck Malinowski
+Frontend Developer: Alexander Carrillo 
+Testing and QA: Kyle Moore 
+Documentation Specialist: Astha Thapa
+
+Work done/ Task Accomplished in the meeting : 
+1. Most of the project 5 work was accomplised on the last meeting held on 7th of April. The documentation of the project along with the tables and the data base was ready to roll but needed some edits and input from each member of the team.
+2. Through out this brief meeting, each of the team member reviewed the work, had a discussion about some specifics of the project that needed immediate attention, and when everything was polished, we all agreed to submit project part 5 that is due tonight.
+3. We had a conversation that after one of the group members had a 1-1 conversation with Dr. Hossein, we got suggested that we do not need to specify any particular site to run our project but just need to mention that we ran it in SQL. All of the team members agreed to that.
+4. We briefly went over the tables we created to check if they needed any changes. All of the group members agreed that it is ready to be posted.
+5. We discussed about the database that has been created by the team and worked to make sure that the directory is actually available on github and on the google document ready to be posted. After accomplishing that, everyone agreed to end the meeting and have the work posted on canvas.
+
+Next Meeting : 4th May , 2025
+-------------------------------------------------------------------------------------------------------------------------------------------
