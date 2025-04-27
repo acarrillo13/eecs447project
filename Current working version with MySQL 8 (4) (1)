@@ -1,28 +1,20 @@
 CREATE TABLE User (
     user_id INTEGER PRIMARY KEY,
     username VARCHAR(20) NOT NULL UNIQUE,
-    role VARCHAR(10),
-    CONSTRAINT chk_role CHECK (role IN ('Admin', 'Member')));
+    role VARCHAR(10));
    
 CREATE TABLE pays_for (
     checkout_id INTEGER PRIMARY KEY,
     user_id INTEGER REFERENCES User,
     amount INTEGER NOT NULL CHECK (amount >= 0));
-  
-  
--- would we want to change all of the timestamp values to just date?  
--- if we do I would suggest keeping the reserve start and end as a time stamp 
--- so the time of the day could be a tie breaker and keep it the same for download 
--- becuase it doesnt matter 
+    
 CREATE TABLE checks_out (
     checkout_id INTEGER PRIMARY KEY,
     user_id INTEGER REFERENCES User,
     media_id varchar(10) REFERENCES Media,
     checkout_date TIMESTAMP NOT NULL,
     due_date TIMESTAMP NOT NULL DEFAULT (CURRENT_TIMESTAMP + INTERVAL 14 DAY),
-    return_date TIMESTAMP NULL DEFAULT NULL,
-    CONSTRAINT valid_due_date CHECK (due_date >= checkout_date),
-    CONSTRAINT valid_return_date CHECK (return_date >= checkout_date));
+    return_date TIMESTAMP NULL DEFAULT NULL);
     
 CREATE TABLE downloads (
     download_id INTEGER PRIMARY KEY,
@@ -32,11 +24,10 @@ CREATE TABLE downloads (
     
 CREATE TABLE reserves (
     reserves_id INTEGER PRIMARY KEY,
-    user_id INTEGER REFERENCES User,
-    media_id VARCHAR(10) REFERENCES Media,
+    user_id INTEGER,
+    media_id VARCHAR(10),
     reserve_start TIMESTAMP NOT NULL,
-    reserve_end TIMESTAMP NULL DEFAULT NULL,
-    CONSTRAINT valid_reserve_date CHECK (reserve_end >= reserve_start));
+    reserve_end TIMESTAMP NULL DEFAULT NULL);
     
 /*
 I think we should make the media id start with something
@@ -85,8 +76,7 @@ CREATE TABLE DigitalMedia (
     title VARCHAR(255) NOT NULL,
     genre VARCHAR(100),
     publisher VARCHAR(255),
-    file_type VARCHAR(50),
-    CONSTRAINT chk_file_type CHECK (file_type IN ('epub', 'mp4', 'mp3', 'pdf'))
+    file_type VARCHAR(50)
 );
 
 INSERT INTO User (user_id, username, role) VALUES (11, 'user_11', 'Admin');
@@ -535,10 +525,4 @@ JOIN DigitalMedia dm ON d.media_id = dm.media_id
 
 WHERE d.user_id = ?;
 
--- to get all the reservations that could be ended
--- meaning the reserved book is now avail
-select r.reserves_id, r.media_id, b.title
-from reserves r
-join Book b on b.media_id = r.media_id
-where is_reserved = false and reserve_end is null;
 */
