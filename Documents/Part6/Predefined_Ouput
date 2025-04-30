@@ -145,3 +145,10 @@ user_id	checkout_id
 50	    42
 44	    45
 13	    47
+
+-- all reservations that can be filled
+
+reserves_id	user_id	media_id	 reserve_start	reserve_end
+2	          15	   MV00000001	 2025-03-17	    null
+3	          11	   BK00000010	 2025-03-02	    null
+11	        33	   MV00000013	 2025-04-06	    null
