@@ -60,25 +60,27 @@ FROM DigitalMedia
 SELECT c.user_id, c.media_id, 'Book' AS media_type, b.title, b.genre, NULL AS director, NULL AS publisher
 FROM checks_out c
 JOIN Book b ON c.media_id = b.media_id
+WHERE c.user_id = ?
 
 UNION ALL
 
 SELECT c.user_id, c.media_id, 'Movie' AS media_type, mv.title, mv.genre, mv.director, mv.publisher
 FROM checks_out c
 JOIN Movie mv ON c.media_id = mv.media_id
+WHERE c.user_id = ?
 
 UNION ALL
 
 SELECT c.user_id, c.media_id, 'Magazine' AS media_type, mg.title, mg.genre, NULL AS director, mg.publication AS publisher
 FROM checks_out c
 JOIN Magazine mg ON c.media_id = mg.media_id
+WHERE c.user_id = ?
 
 UNION ALL
 
 SELECT d.user_id, d.media_id, 'DigitalMedia' AS media_type, dm.title, dm.genre, NULL AS director, dm.publisher
 FROM downloads d
 JOIN DigitalMedia dm ON d.media_id = dm.media_id
-
 WHERE d.user_id = ?;
 
 --Users who have never checked anything out 
