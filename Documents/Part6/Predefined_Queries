@@ -104,3 +104,15 @@ WHERE reserve_end IS NULL OR reserve_end > CURDATE();
 select sum(amount) as total_fees
 from pays_for
 where user_id = ?;
+
+-- all unpaid for late/overdue books
+select user_id, checkout_id
+from checks_out
+where (return_date > due_date OR (return_date is null AND CURRENT_DATE > due_date))
+AND checkout_id NOT IN (select checkout_id from pays_for);
+
+-- all paid for late
+select user_id, checkout_id
+from checks_out
+where return_date > due_date
+AND checkout_id IN (select checkout_id from pays_for);
