@@ -103,7 +103,7 @@ FROM reserves r
 WHERE reserve_end IS NULL OR reserve_end > CURDATE();
 
 -- Find a users total fees paid
-select sum(amount) as total_fees
+select user_id, sum(amount) as total_fees
 from pays_for
 where user_id = ?;
 
