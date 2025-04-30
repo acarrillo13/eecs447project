@@ -37,86 +37,111 @@ checkout_id	user_id	media_id	  checkout_date	        due_date	           return_
 
 
 -- All over due items
+checkout_id	user_id	media_id	  checkout_date	  due_date	  return_date
+11	        57	    MG00000020	2024-09-06	    2024-09-20	null
+12	        42	    BK00000006	2025-04-22	    2025-04-28	null
+15	        52	    MV00000002	2025-01-18	    2025-02-01	null
+17	        27	    BK00000015	2024-08-16	    2024-08-30	null
+18	        55	    MG00000012	2024-09-25	    2024-10-09	null
+24	        15	    MV00000008	2024-08-14	    2024-08-28	null
+26	        39	    MG00000007	2024-09-01	    2024-09-15	null
+31	        43	    BK00000016	2024-10-08	    2024-10-22	null
+32	        48	    MG00000001	2024-06-20	    2024-07-04	null
+34	        11	    BK00000001	2024-10-30	    2024-11-13	null
+36	        29	    MV00000004	2024-10-27	    2024-11-10	null
+43	        34	    MV00000005	2024-08-23	    2024-09-06	null
+48	        60	    MV00000004	2024-05-19	    2024-06-02	null
 
 
 -- To get all the check_outs from the user in the last month
-SELECT *
-FROM check_outs
-WHERE user_id = ? 
-  AND checkout_date >= CURDATE() - INTERVAL 1 MONTH;
+checkout_id	user_id	media_id	  checkout_date	due_date	  return_date
+1	          36	    MV00000016	2025-04-26	  2025-05-10	null
 
 
--- To see how many times a piece of DigitalMedia has been downloaded
-SELECT COUNT(*)
-FROM downloads
-WHERE media_id = ?;
+-- To see how many times a piece of DigitalMedia has been downloaded(for DM00000001)
+COUNT(*)
+3
 
 -- This assumes that we will charge the user $1 for every day overdue
 -- To caclulate all the users current fees 
-SELECT user_id, media_id, DATEDIFF(CURDATE(), due_date) AS overdue_amount
-FROM checks_out
-WHERE due_date < CURDATE() 
-AND return_date is null
-AND user_id = ?;
-
--- To get all the ____ from the ___ type of media
-SELECT *
-FROM Book;
-
-SELECT *
-FROM Movie;
-
-SELECT *
-FROM Magazine
-
-SELECT * 
-FROM DigitalMedia
+user_id	media_id	  overdue_amount
+52	    MV00000002	88
 
 -- To get all the users checked out media
-SELECT c.user_id, c.media_id, 'Book' AS media_type, b.title, b.genre, NULL AS director, NULL AS publisher
-FROM checks_out c
-JOIN Book b ON c.media_id = b.media_id
-
-UNION ALL
-
-SELECT c.user_id, c.media_id, 'Movie' AS media_type, mv.title, mv.genre, mv.director, mv.publisher
-FROM checks_out c
-JOIN Movie mv ON c.media_id = mv.media_id
-
-UNION ALL
-
-SELECT c.user_id, c.media_id, 'Magazine' AS media_type, mg.title, mg.genre, NULL AS director, mg.publication AS publisher
-FROM checks_out c
-JOIN Magazine mg ON c.media_id = mg.media_id
-
-UNION ALL
-
-SELECT d.user_id, d.media_id, 'DigitalMedia' AS media_type, dm.title, dm.genre, NULL AS director, dm.publisher
-FROM downloads d
-JOIN DigitalMedia dm ON d.media_id = dm.media_id
-
-WHERE d.user_id = ?;
+user_id	media_id	  media_type	  title	                  genre	      director	    publisher
+18	    BK00000013	Book	        Voices of Tomorrow	    Non-fiction	null	        null
+18	    MV00000015	Movie	        Rogue Galaxy	          Sci-Fi	    Yasmine King	Universal Future
+18	    MG00000009	Magazine	    Auto Today	            Automotive	null	        MotorWorks
+18	    DM00000009	DigitalMedia	True Crime Files	      Crime	      null	        Grit Media
 
 --Users who have never checked anything out 
-SELECT u.user_id, u.username
-FROM User u
-LEFT JOIN checks_out c ON u.user_id = c.user_id
-WHERE c.user_id IS NULL;
+user_id	username
+12	    user_12
+17	    user_17
+19	    user_19
+23	    user_23
+24	    user_24
+25	    user_25
+32	    user_32
+35	    user_35
+37	    user_37
+38	    user_38
+40	    user_40
+41	    user_41
+45	    user_45
+46	    user_46
+47	    user_47
+49	    user_49
+51	    user_51
+54	    user_54
+58	    user_58
 
 -- top 5 most downloaded content
-SELECT dm.title, COUNT(*) AS download_count
-FROM downloads d
-JOIN DigitalMedia dm ON d.media_id = dm.media_id
-GROUP BY d.media_id
-ORDER BY download_count DESC
-LIMIT 5;
+title	            download_count
+Smart Cooking	    4
+The Future Mind	  4
+The Startup Bible	3
+True Crime Files	3
+Life in 2040	    3
 
 -- all reserved items
-SELECT r.user_id, r.media_id, r.reserve_start, r.reserve_end
-FROM reserves r
-WHERE reserve_end IS NULL OR reserve_end > CURDATE();
+user_id	media_id	reserve_start	reserve_end
+15	MV00000001	  2025-03-17	  null
+11	BK00000010	  2025-03-02	  null
+30	BK00000001	  2025-03-12	  null
+33	MV00000013	  2025-04-06	  null
+13	MV00000016	  2025-04-02	  null
 
 -- Find a users total fees paid
-select sum(amount) as total_fees
-from pays_for
-where user_id = ?;
+user_id	total_fees
+18	    9
+
+-- all unpaid for late/overdue books
+user_id	checkout_id
+57	    11
+42	    12
+52	    15
+27	    17
+55	    18
+15	    24
+39	    26
+30	    29
+43	    31
+48	    32
+11	    34
+29	    36
+34	    43
+60	    48
+31	    50
+
+-- all paid for late
+user_id	checkout_id
+18	    13
+22	    14
+21	    20
+48	    25
+14	    37
+18	    39
+50	    42
+44	    45
+13	    47
