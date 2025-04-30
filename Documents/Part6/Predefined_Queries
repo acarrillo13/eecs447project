@@ -99,3 +99,8 @@ LIMIT 5;
 SELECT r.user_id, r.media_id, r.reserve_start, r.reserve_end
 FROM reserves r
 WHERE reserve_end IS NULL OR reserve_end > CURDATE();
+
+-- Find a users total fees paid
+select sum(amount) as total_fees
+from pays_for
+where user_id = ?;
