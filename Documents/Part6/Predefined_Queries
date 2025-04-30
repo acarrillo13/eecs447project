@@ -1,0 +1,101 @@
+--Find all users and their checkouts where they returned something late and they haven't paid the late fee yet
+select C.user_id, C.checkout_id
+from checks_out C
+where return_date > due_date
+and C.checkout_id not in (select P.checkout_id from pays_for P);
+
+-- User checks out a book
+INSERT INTO checks_out (user_id, media_id, checkout_date, due_date)
+VALUES (?, ?, CURDATE(), CURDATE() + INTERVAL 14 DAY);
+
+-- User returns the book 
+UPDATE checks_out
+SET return_date = CURDATE()
+WHERE media_id = ? AND return_date IS NULL;
+
+-- All active checked out books
+SELECT * FROM checks_out
+WHERE return_date IS NULL;
+
+
+-- All over due items
+SELECT * FROM checks_out
+WHERE return_date IS NULL AND due_date < CURDATE();
+
+
+-- To get all the check_outs from the user in the last month
+SELECT *
+FROM check_outs
+WHERE user_id = ? 
+  AND checkout_date >= CURDATE() - INTERVAL 1 MONTH;
+
+
+-- To see how many times a piece of DigitalMedia has been downloaded
+SELECT COUNT(*)
+FROM downloads
+WHERE media_id = ?;
+
+-- This assumes that we will charge the user $1 for every day overdue
+-- To caclulate all the users current fees 
+SELECT user_id, media_id, DATEDIFF(CURDATE(), due_date) AS overdue_amount
+FROM checks_out
+WHERE due_date < CURDATE() 
+AND return_date is null
+AND user_id = ?;
+
+-- To get all the ____ from the ___ type of media
+SELECT *
+FROM Book;
+
+SELECT *
+FROM Movie;
+
+SELECT *
+FROM Magazine
+
+SELECT * 
+FROM DigitalMedia
+
+-- To get all the users checked out media
+SELECT c.user_id, c.media_id, 'Book' AS media_type, b.title, b.genre, NULL AS director, NULL AS publisher
+FROM checks_out c
+JOIN Book b ON c.media_id = b.media_id
+
+UNION ALL
+
+SELECT c.user_id, c.media_id, 'Movie' AS media_type, mv.title, mv.genre, mv.director, mv.publisher
+FROM checks_out c
+JOIN Movie mv ON c.media_id = mv.media_id
+
+UNION ALL
+
+SELECT c.user_id, c.media_id, 'Magazine' AS media_type, mg.title, mg.genre, NULL AS director, mg.publication AS publisher
+FROM checks_out c
+JOIN Magazine mg ON c.media_id = mg.media_id
+
+UNION ALL
+
+SELECT d.user_id, d.media_id, 'DigitalMedia' AS media_type, dm.title, dm.genre, NULL AS director, dm.publisher
+FROM downloads d
+JOIN DigitalMedia dm ON d.media_id = dm.media_id
+
+WHERE d.user_id = ?;
+
+--Users who have never checked anything out 
+SELECT u.user_id, u.username
+FROM User u
+LEFT JOIN checks_out c ON u.user_id = c.user_id
+WHERE c.user_id IS NULL;
+
+-- top 5 most downloaded content
+SELECT dm.title, COUNT(*) AS download_count
+FROM downloads d
+JOIN DigitalMedia dm ON d.media_id = dm.media_id
+GROUP BY d.media_id
+ORDER BY download_count DESC
+LIMIT 5;
+
+-- all reserved items
+SELECT r.user_id, r.media_id, r.reserve_start, r.reserve_end
+FROM reserves r
+WHERE reserve_end IS NULL OR reserve_end > CURDATE();
