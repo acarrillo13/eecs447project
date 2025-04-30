@@ -118,3 +118,19 @@ select user_id, checkout_id
 from checks_out
 where return_date > due_date
 AND checkout_id IN (select checkout_id from pays_for);
+
+-- all reservations that can be filled 
+SELECT r.*
+FROM reserves r
+WHERE r.reserve_start = (
+    SELECT MIN(r2.reserve_start)
+    FROM reserves r2
+    WHERE r2.media_id = r.media_id
+)
+AND NOT EXISTS (
+    SELECT 1
+    FROM checks_out c
+    WHERE c.media_id = r.media_id
+    AND c.return_date IS NULL
+)
+AND reserve_end is NULL;
