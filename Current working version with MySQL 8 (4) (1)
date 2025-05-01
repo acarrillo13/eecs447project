@@ -347,7 +347,7 @@ INSERT INTO Book (media_id, title, author, genre, is_reserved) VALUES
 ('BK00000017', 'Coded Lies', 'Nathan Grey', 'Mystery', FALSE),
 ('BK00000018', 'Legacy of Light', 'Rachel Lim', 'Fantasy', TRUE),
 ('BK00000019', 'Hidden Datastream', 'Carlos Vega', 'Non-fiction', FALSE),
-('BK00000020', 'The Whispered Word', 'Debra Ford', 'Mystery', FALSE);
+('BK00000020', 'The Whispered Word', 'Debra Ford', 'Mystery', FALSE),
 ('BK00000021', 'The Whispered Word', 'Debra Ford', 'Mystery', FALSE);
 
 INSERT INTO Movie (media_id, title, genre, director, publisher, is_reserved) VALUES
