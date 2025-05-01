@@ -1,3 +1,20 @@
+-- most popular author in the last mont
+SELECT B.author, COUNT(*) AS borrow_count
+FROM checks_out C
+JOIN Book B ON C.media_id = B.media_id
+WHERE C.checkout_date >= CURDATE() - INTERVAL 1 MONTH
+GROUP BY B.author
+ORDER BY borrow_count DESC
+LIMIT 1;
+
+-- Avg borrow time per genre (mystery used as example)
+SELECT B.genre, AVG(DATEDIFF(C.return_date, C.checkout_date)) AS avg_borrow_days
+FROM checks_out C
+JOIN Book B ON C.media_id = B.media_id
+WHERE C.return_date IS NOT NULL
+  AND B.genre = 'Mystery'
+GROUP BY B.genre;
+
 -- all users with an overdue book
 SELECT U.username, B.title, C.due_date
 FROM checks_out C
