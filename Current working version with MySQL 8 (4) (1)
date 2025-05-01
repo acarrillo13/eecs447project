@@ -150,6 +150,7 @@ INSERT INTO Media (media_id, date_published) VALUES ('BK00000017', '2010-08-23')
 INSERT INTO Media (media_id, date_published) VALUES ('BK00000018', '2024-11-17');
 INSERT INTO Media (media_id, date_published) VALUES ('BK00000019', '2017-08-17');
 INSERT INTO Media (media_id, date_published) VALUES ('BK00000020', '2016-03-19');
+INSERT INTO Media (media_id, date_published) VALUES ('BK00000021', '2016-03-19');
 
 INSERT INTO Media (media_id, date_published) VALUES ('DM00000001', '2018-10-24');
 INSERT INTO Media (media_id, date_published) VALUES ('DM00000002', '2023-06-02');
@@ -347,6 +348,7 @@ INSERT INTO Book (media_id, title, author, genre, is_reserved) VALUES
 ('BK00000018', 'Legacy of Light', 'Rachel Lim', 'Fantasy', TRUE),
 ('BK00000019', 'Hidden Datastream', 'Carlos Vega', 'Non-fiction', FALSE),
 ('BK00000020', 'The Whispered Word', 'Debra Ford', 'Mystery', FALSE);
+('BK00000021', 'The Whispered Word', 'Debra Ford', 'Mystery', FALSE);
 
 INSERT INTO Movie (media_id, title, genre, director, publisher, is_reserved) VALUES
 ('MV00000001', 'Echoes in the Void', 'Sci-Fi', 'Mia Turner', 'SilverScreen Studios', FALSE),
