@@ -43,6 +43,14 @@ WHERE due_date < CURDATE()
 AND return_date is null
 AND user_id = ?;
 
+-- to get fees for all users 
+SELECT user_id, SUM(DATEDIFF(CURDATE(), due_date) AS total
+FROM checks_out
+WHERE due_date < CURDATE()
+  AND return_date IS NULL
+GROUP BY user_id
+ORDER BY total;
+
 -- To get all the ____ from the ___ type of media
 SELECT *
 FROM Book;
