@@ -1,3 +1,17 @@
+-- all users with an overdue book
+SELECT U.username, B.title, C.due_date
+FROM checks_out C
+JOIN Book B ON C.media_id = B.media_id
+JOIN User U ON C.user_id = U.user_id
+WHERE C.return_date IS NULL
+  AND C.due_date < CURDATE();
+
+-- all users with an overdue media
+SELECT user_id, media_id, due_date
+FROM checks_out 
+WHERE return_date IS NULL
+  AND due_date < CURDATE();
+
 -- all books due in the next week
 SELECT B.title, U.username, C.due_date
 FROM checks_out C
