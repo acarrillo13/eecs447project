@@ -1,3 +1,11 @@
+-- available books within a genre
+SELECT B.media_id, B.title, B.author
+FROM Book B
+LEFT JOIN checks_out C ON B.media_id = C.media_id AND C.return_date IS NULL
+WHERE C.checkout_id IS NULL
+  AND B.is_reserved = FALSE
+  AND B.genre = 'Mystery';
+
 -- frequent borrowers according to genre
 SELECT U.user_id, U.username, COUNT(*) AS borrow_count
 FROM checks_out C
