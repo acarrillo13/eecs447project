@@ -1,3 +1,13 @@
+-- frequent borrowers according to genre
+SELECT U.user_id, U.username, COUNT(*) AS borrow_count
+FROM checks_out C
+JOIN Book B ON C.media_id = B.media_id
+JOIN User U ON C.user_id = U.user_id
+WHERE B.genre = 'Fiction'
+  AND C.checkout_date >= CURDATE() - INTERVAL 1 YEAR
+GROUP BY U.user_id, U.username
+ORDER BY borrow_count DESC;
+
 -- most popular author in the last mont
 SELECT B.author, COUNT(*) AS borrow_count
 FROM checks_out C
