@@ -60,8 +60,8 @@ ORDER BY C.due_date;
 SELECT user_id, media_id, due_date
 FROM checks_out
 WHERE return_date IS NULL
-  AND C.due_date BETWEEN CURDATE() AND CURDATE() + INTERVAL 7 DAY
-ORDER BY C.due_date;
+  AND due_date BETWEEN CURDATE() AND CURDATE() + INTERVAL 7 DAY
+ORDER BY due_date;
 
 
 --Find all users and their checkouts where they returned something late and they haven't paid the late fee yet
