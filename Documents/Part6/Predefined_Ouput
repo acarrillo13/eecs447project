@@ -1,3 +1,64 @@
+-- available books within a genre
+media_id	  title              	author
+BK00000017	Coded Lies	        Nathan Grey
+BK00000020	The Whispered Word	Debra Ford
+BK00000021	The Whispered Word	Debra Ford
+
+-- frequent borrowers according to genre
+user_id	username	borrow_count
+56	    user_56  	1
+42	    user_42	  1
+43	    user_43	  1
+11	    user_11	  1
+14	    user_14	  1
+28	    user_28	  1
+50	    user_50	  1
+
+-- most popular author in the last month
+author	    borrow_count
+Zara Lopez	1
+
+-- Avg borrow time per genre
+genre   	avg_borrow_days
+Mystery	  15.0000
+
+-- all users with an overdue book
+username	title           	due_date
+user_42	  Echoes of Time	  2025-04-28
+user_27	  Deep Protocol   	2024-08-30
+user_43  	Suburban Myths  	2024-10-22
+user_11	  The Silent Grove	2024-11-13
+
+-- all users with an overdue media
+user_id	media_id	  due_date
+57	    MG00000020	2024-09-20
+42	    BK00000006	2025-04-28
+52	    MV00000002	2025-02-01
+27	    BK00000015	2024-08-30
+55    	MG00000012	2024-10-09
+43	    MV00000007	2025-05-01
+15	    MV00000008	2024-08-28
+39	    MG00000007	2024-09-15
+39	    MV00000020	2025-05-01
+43	    BK00000016	2024-10-22
+48    	MG00000001	2024-07-04
+11    	BK00000001	2024-11-13
+29    	MV00000004	2024-11-10
+34    	MV00000005	2024-09-06
+60    	MV00000004	2024-06-02
+
+-- all books due in the next week
+title         	username	due_date
+Suburban Myths	user_56	  2025-05-07
+
+-- all media due in a week
+user_id	 media_id	    due_date
+22    	 MV00000002	  2025-05-02
+26	     MV00000011	  2025-05-03
+15	     MV00000018	  2025-05-04
+59	     MG00000015	  2025-05-06
+56	     BK00000016	  2025-05-07
+20	     MG00000014	  2025-05-08
 
 --Find all users and their checkouts where they returned something late and they haven't paid the late fee yet
 user_id	checkout_id
@@ -66,6 +127,22 @@ COUNT(*)
 -- To caclulate all the users current fees 
 user_id	media_id	  overdue_amount
 52	    MV00000002	88
+
+-- to get fees for all users 
+user_id	total
+42	    4
+52	    90
+11	    170
+29	    173
+43	    193
+55	    205
+57	    224
+39	    230
+34	    238
+27	    245
+15	    247
+48	    302
+60	    334
 
 -- To get all the users checked out media
 user_id	media_id	  media_type	  title	                  genre	      director	    publisher
@@ -147,7 +224,6 @@ user_id	checkout_id
 13	    47
 
 -- all reservations that can be filled
-
 reserves_id	user_id	media_id	 reserve_start	reserve_end
 2	          15	   MV00000001	 2025-03-17	    null
 3	          11	   BK00000010	 2025-03-02	    null
