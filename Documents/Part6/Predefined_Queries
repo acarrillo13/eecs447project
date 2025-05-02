@@ -70,15 +70,6 @@ from checks_out C
 where return_date > due_date
 and C.checkout_id not in (select P.checkout_id from pays_for P);
 
--- User checks out a book
-INSERT INTO checks_out (user_id, media_id, checkout_date, due_date)
-VALUES (?, ?, CURDATE(), CURDATE() + INTERVAL 14 DAY);
-
--- User returns the book 
-UPDATE checks_out
-SET return_date = CURDATE()
-WHERE media_id = ? AND return_date IS NULL;
-
 -- All active checked out books
 SELECT * FROM checks_out
 WHERE return_date IS NULL;
