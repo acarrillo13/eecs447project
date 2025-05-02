@@ -94,7 +94,7 @@ WHERE media_id = ?;
 
 -- This assumes that we will charge the user $1 for every day overdue
 -- To caclulate all the users current fees 
-SELECT user_id, media_id, DATEDIFF(CURDATE(), due_date) AS overdue_amount
+SELECT user_id, media_id, DATEDIFF(CURDATE(), due_date)) AS overdue_amount
 FROM checks_out
 WHERE due_date < CURDATE() 
 AND return_date is null
